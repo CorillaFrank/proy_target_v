@@ -1,0 +1,84 @@
+{
+  "business_context": "Data Mart de ventas para Target.",
+  "allowed_tables": [
+    "fact_ventas_promociones",
+    "dim_cliente",
+    "dim_producto",
+    "dim_sede",
+    "dim_tiempo"
+  ],
+  "metrics": {
+    "total_ventas_por_producto":"ROUND(cantidad * precio_unitario, 2)",
+    "mnpd_por_venta": "ROUND(ventas - (cantidad * precio_unitario * monto_descuento) - costo_envio, 2)",
+    "impacto_descuento_porcentaje": "ROUND((SUM(cantidad * precio_unitario * monto_descuento) / SUM(ventas)) * 100, 2)",
+    "ventas_por_categoria": "ROUND(SUM(ventas), 2)",
+    "ventas_por_mes": "ROUND(SUM(ventas), 2)"
+  },
+  "tables": {
+    "fact_ventas_promociones": {
+      "grain": "Una fila en fact_ventas_promociones representa una venta de un producto a un cliente, en una sede específica, en una fecha determinada.",
+      "columns": {
+        "id_fact": "Identificador de la venta.",
+        "sk_cliente": "Id del Cliente.",
+        "sk_producto": "Id del Producto.",
+        "sk_tiempo": "Id del tiempo.",
+        "sk_sede": "Id de la sede.",
+        "ventas": "Venta por cada Producto.",
+        "cantidad": "Cantidad vendida.",
+        "precio_unitario": "Precio unitario.",
+        "costo_envio": "Precio del Envio.",
+        "margen_base": "Porcentaje de ganancia",
+        "ganancias": "Ganancia bruta por producto vendido.",
+        "costo_total_producto": "Costo del producto a Target",
+        "mnpd": "Margen Neto Post Descuento"
+        
+      }
+    },
+    "dim_cliente": {
+      "grain": "Una fila representa un cliente.",
+      "columns": {
+        "sk_cliente": "Clave del cliente.",
+        "nombre_cliente": "Nombre del cliente.",
+        "edad_cliente": "Edad del cliente.",
+        "segmento_cliente": "Clasifica a los clientes en grupos con características similares."
+      }
+    },
+    "dim_producto": {
+      "grain": "Una fila representa un producto.",
+      "columns": {
+        "sk_producto": "Clave de producto.",
+        "categoria_producto": "Categoria del producto.",
+        "subcategoria_producto": "SubCategoria del producto.",
+        "nombre_producto": "Nombre del producto.",
+        "contenedor": "Tipo de empaque."
+      }
+    },
+    "dim_sede": {
+      "grain": "Una fila representa una sede.",
+      "columns": {
+        "sk_sede": "Clave de la sede.",
+        "ciudad": "Nombre de la ciudad.",
+        "estado": "Nombre del estado.",
+        "codigo_postal": "Codigo postal.",
+        "region": "Nombre de la region."
+      }
+    },
+    "dim_tiempo": {
+      "grain": "Una fila representa una fecha.",
+      "columns": {
+        "sk_tiempo": "Clave de fecha.",
+        "fecha": "Fecha completa.",
+        "año": "Año.",
+        "mes": "Mes.",
+        "trimestre": "Trimestre.",
+        "indicador_descuento": "Indicador de descuento."
+      }
+    }
+  },
+  "relationships": [
+    "fact_ventas_promociones.sk_tiempo = dim_tiempo.sk_tiempo",
+    "fact_ventas_promociones.sk_sede = dim_sede.sk_sede",
+    "fact_ventas_promociones.sk_cliente = dim_cliente.sk_cliente",
+    "fact_ventas_promociones.sk_producto = dim_producto.sk_producto"
+  ]
+}
