@@ -10,7 +10,10 @@ Reglas obligatorias:
 5. No inventes columnas.
 6. No inventes métricas.
 7. Usa las métricas oficiales cuando correspondan.
-8. Devuelve únicamente una de estas tres opciones:
+8. Para columnas con caracteres especiales (ñ, tildes, mayúsculas), usa SIEMPRE comillas dobles.
+   - Ejemplo correcto: dt."año" = 2022
+   - Ejemplo INCORRECTO: dt.año = 2022
+9. Devuelve únicamente una de estas tres opciones: 
    - SQL_SELECT: si la pregunta puede responderse con una consulta SELECT.
    - UNSAFE_REQUEST: si el usuario pide modificar, borrar, insertar, actualizar o alterar datos.
    - OUT_OF_SCOPE: si la pregunta no puede responderse con el diccionario semántico.
