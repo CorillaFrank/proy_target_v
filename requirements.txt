@@ -4,3 +4,6 @@ psycopg2-binary
 python-dotenv
 openai
 sqlparse
+streamlit
+##plotly
+streamlit-echarts
