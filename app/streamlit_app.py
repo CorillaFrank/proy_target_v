@@ -35,7 +35,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ==================== CSS SIMPLIFICADO ====================
+# ==================== Style====================
 st.markdown("""
 <style>
 * {
@@ -256,13 +256,13 @@ with col2:
         col_logo, col_titulo = st.columns([1, 3])
         
         with col_logo:
-            # CORREGIDO: Usar Path para encontrar el logo correctamente
-            logo_path = Path(__file__).parent / "logo.png"
+            # CORREGIDO: Buscar en la carpeta assets
+            logo_path = Path(__file__).parent / "assets" / "logo.png"
             if logo_path.exists():
                 st.image(str(logo_path), width=70)
             else:
-                # Fallback: mostrar un emoji si no encuentra el logo
-                st.markdown("<h1 style='font-size: 2.5rem; margin:0; color: #ff3333;'></h1>", unsafe_allow_html=True)
+                # Fallback si no encuentra
+                st.markdown("", unsafe_allow_html=True)
         
         with col_titulo:
             st.markdown("""
@@ -555,7 +555,7 @@ def render_query_mode():
         render_chart(df, chart_type)
         st.markdown('</div>', unsafe_allow_html=True)
 
-
+# ==================== Panel ====================
 def render_dashgen_mode():
     st.markdown('<div class="glass-card">', unsafe_allow_html=True)
     st.markdown("### Generador de paneles de control")
