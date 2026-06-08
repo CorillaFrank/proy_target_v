@@ -5,5 +5,5 @@ python-dotenv
 openai
 sqlparse
 streamlit
-##plotly
 streamlit-echarts
+streamlit-option-menu
