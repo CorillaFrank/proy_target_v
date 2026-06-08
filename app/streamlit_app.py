@@ -6,6 +6,7 @@ import pandas as pd
 from streamlit_option_menu import option_menu
 
 # ==================== RUTAS Y MODULOS ====================
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SRC_PATH = PROJECT_ROOT / "src"
 sys.path.append(str(SRC_PATH))
@@ -34,6 +35,11 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Verificación de Google Search Console
+st.markdown("""
+    <meta name="google-site-verification" content="hiUFU3MNXZ5vzr0cAz8NRRS-jS_YgnzBDwFl-QZo7f8" />
+""", unsafe_allow_html=True)
 
 # ==================== Style====================
 st.markdown("""
