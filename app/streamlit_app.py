@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-
+import streamlit.components.v1 as components
 import streamlit as st
 import pandas as pd
 from streamlit_option_menu import option_menu
@@ -37,9 +37,12 @@ st.set_page_config(
 )
 
 # Verificación de Google Search Console
-st.markdown("""
+components.html(
+    """
     <meta name="google-site-verification" content="hiUFU3MNXZ5vzr0cAz8NRRS-jS_YgnzBDwFl-QZo7f8" />
-""", unsafe_allow_html=True)
+    """,
+    height=0,
+)
 
 # ==================== Style====================
 st.markdown("""
