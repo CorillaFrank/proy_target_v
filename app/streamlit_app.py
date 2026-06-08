@@ -256,7 +256,13 @@ with col2:
         col_logo, col_titulo = st.columns([1, 3])
         
         with col_logo:
-            st.image("assets/logo.png", width=70)
+            # CORREGIDO: Usar Path para encontrar el logo correctamente
+            logo_path = Path(__file__).parent / "logo.png"
+            if logo_path.exists():
+                st.image(str(logo_path), width=70)
+            else:
+                # Fallback: mostrar un emoji si no encuentra el logo
+                st.markdown("<h1 style='font-size: 2.5rem; margin:0; color: #ff3333;'></h1>", unsafe_allow_html=True)
         
         with col_titulo:
             st.markdown("""
@@ -270,7 +276,6 @@ with col2:
                 </span>
             </div>
             """, unsafe_allow_html=True)
-    
     # Párrafo centrado debajo
     st.markdown("""
     <div style="text-align: center; margin-top: 10px;">
